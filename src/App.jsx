@@ -8,6 +8,7 @@ import { CharacterHeader } from './components/CharacterHeader'
 import { AbilityScores } from './components/AbilityScores'
 import { SkillList } from './components/SkillList'
 import { CombatStats } from './components/CombatStats'
+import { WeaponsPanel } from './components/WeaponsPanel'
 import { DiceRoller } from './components/DiceRoller'
 import { ClassFeatures } from './components/ClassFeatures'
 import { Spellbook } from './components/Spellbook'
@@ -137,6 +138,12 @@ export default function App() {
             totalAbilities={totalAbilities}
             onUpdate={update}
             onUpdateHP={updateHP}
+            roller={roller}
+          />
+          <WeaponsPanel 
+            character={character}
+            totalAbilities={totalAbilities}
+            onUpdate={update}
             roller={roller}
           />
           <ClassFeatures

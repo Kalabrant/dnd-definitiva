@@ -52,6 +52,7 @@ const DEFAULT_CHARACTER = {
   },
 
   equipment: [],
+  weapons: [],
   currency: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
   traits: { personality: '', ideals: '', bonds: '', flaws: '' },
   notes: '',
