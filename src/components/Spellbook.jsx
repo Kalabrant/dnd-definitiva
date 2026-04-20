@@ -305,7 +305,13 @@ export function Spellbook({ character, totalAbilities, onTogglePrepared, onToggl
       )}
 
       {selectedSpell && (
-        <SpellModal spell={selectedSpell} onClose={() => setSelectedSpell(null)} onDiceRoll={handleDiceRoll} />
+        <SpellModal 
+          spell={selectedSpell} 
+          character={character}
+          totalAbilities={totalAbilities}
+          onClose={() => setSelectedSpell(null)} 
+          onDiceRoll={handleDiceRoll} 
+        />
       )}
     </div>
   )
