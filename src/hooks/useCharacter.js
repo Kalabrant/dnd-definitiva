@@ -1,12 +1,23 @@
 import { useState, useCallback, useEffect } from 'react'
 import { getProficiencyBonus } from '../utils/dndMath'
 
-// Dados de golpe por clase
 const CLASS_HIT_DIE = {
   Barbarian: 12,
   Fighter: 10, Paladin: 10, Ranger: 10,
   Artificer: 8, Bard: 8, Cleric: 8, Druid: 8, Monk: 8, Rogue: 8, Sorcerer: 8, Warlock: 8,
   Wizard: 6,
+}
+
+const CLASS_SPELL_ABILITY = {
+  Artificer: 'int',
+  Bard: 'cha',
+  Cleric: 'wis',
+  Druid: 'wis',
+  Paladin: 'cha',
+  Ranger: 'wis',
+  Sorcerer: 'cha',
+  Warlock: 'cha',
+  Wizard: 'int',
 }
 
 const DEFAULT_CHARACTER = {
@@ -92,10 +103,13 @@ export function useCharacter() {
         next.hitDice.used = Math.min(next.hitDice.used, lvl)
       }
 
-      // Al cambiar clase: actualizar cara del dado de golpe y salvaciones iniciales
+      // Al cambiar clase: actualizar cara del dado de golpe, salvaciones iniciales y stat de conjuros
       if (path === 'class') {
         next.hitDice.faces = CLASS_HIT_DIE[value] ?? 8
         next.hitDice.total = next.level
+        if (CLASS_SPELL_ABILITY[value]) {
+          next.spells.spellcastingAbility = CLASS_SPELL_ABILITY[value]
+        }
       }
 
       return next

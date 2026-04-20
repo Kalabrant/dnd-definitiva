@@ -182,7 +182,13 @@ export default function App() {
       )}
 
       {spellModal && (
-        <SpellModal spell={spellModal} onClose={() => setSpellModal(null)} onDiceRoll={handleDiceFromText} />
+        <SpellModal 
+          spell={spellModal} 
+          character={character}
+          totalAbilities={totalAbilities}
+          onClose={() => setSpellModal(null)} 
+          onDiceRoll={handleDiceFromText} 
+        />
       )}
     </div>
   )

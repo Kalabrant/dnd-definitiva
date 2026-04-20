@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { X } from 'lucide-react'
+import { X, Dice6 } from 'lucide-react'
 import { EntryBlock } from './RuleText'
-import { SCHOOL_NAMES } from '../utils/dndMath'
+import { SCHOOL_NAMES, getModifier, formatMod, getProficiencyBonus } from '../utils/dndMath'
 import { translateSpellName } from '../utils/spellNames'
 
 function formatTime(time) {
@@ -56,7 +56,7 @@ function formatComponents(components) {
 
 const LEVEL_ES = ['Truco', '1.º', '2.º', '3.º', '4.º', '5.º', '6.º', '7.º', '8.º', '9.º']
 
-export function SpellModal({ spell, onClose, onDiceRoll }) {
+export function SpellModal({ spell, onClose, onDiceRoll, character, totalAbilities }) {
   useEffect(() => {
     const fn = e => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', fn)
@@ -96,6 +96,27 @@ export function SpellModal({ spell, onClose, onDiceRoll }) {
             </div>
           ))}
         </div>
+
+        {spell.spellAttack && character && (
+          <div className="bg-red-50/50 border-b border-stone-200 p-3 flex justify-center">
+            {(() => {
+              const pb = getProficiencyBonus(character.level)
+              const sca = character.spells?.spellcastingAbility || 'int'
+              const statScore = totalAbilities?.[sca] ?? character.abilities[sca] ?? 10
+              const attackBonus = pb + getModifier(statScore)
+              
+              return (
+                <button
+                  onClick={() => onDiceRoll('1d20', `Ataque conjuro: ${translateSpellName(spell.name)}`, attackBonus)}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-700 hover:bg-red-600 text-white font-bold text-sm rounded shadow transition-colors"
+                >
+                  <Dice6 size={16} />
+                  Ataque de Conjuro ({formatMod(attackBonus)})
+                </button>
+              )
+            })()}
+          </div>
+        )}
 
         <div className="p-4" lang="en">
           {(spell.entries ?? []).map((entry, i) => (
