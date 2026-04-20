@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-stone-900 text-stone-100 min-h-screen m-0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  #root {
+    @apply w-full max-w-none text-left border-0;
+    min-height: 100svh;
+  }
+  * { box-sizing: border-box; }
+}
+
+@layer utilities {
+  .parchment { background-color: #f5f0e8; color: #1a1209; }
+
+  .panel { @apply rounded-lg border border-stone-300 overflow-hidden; }
+  .panel-header { @apply bg-red-900 text-white font-bold text-xs uppercase tracking-wider px-3 py-1.5; }
+  .panel-body { @apply bg-amber-50/80 p-3 text-stone-800; }
+
+  .stat-box { @apply flex flex-col items-center justify-center border-2 border-stone-400 rounded-lg bg-white/80 py-2 px-1 gap-1; min-width: 80px; }
+  .stat-mod { @apply text-2xl font-bold text-stone-800; }
+  .stat-score { @apply text-sm text-stone-600 font-semibold border border-stone-300 rounded; width: 52px; text-align: center; }
+  .stat-label { @apply text-xs font-bold text-stone-500 uppercase tracking-wide text-center; }
+
+  .skill-row { @apply flex items-center gap-2 py-0.5 px-2 rounded hover:bg-black/5 transition-colors; }
+  .prof-dot { @apply w-3.5 h-3.5 rounded-full border-2 border-stone-500 flex-shrink-0 cursor-pointer transition-colors; }
+  .prof-dot.proficient { @apply bg-stone-700 border-stone-700; }
+  .prof-dot.expert { @apply bg-amber-600 border-amber-600; }
+
+  .dice-btn {
+    @apply inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-bold
+           bg-red-800 text-white hover:bg-red-700 cursor-pointer transition-colors
+           border border-red-900 shadow-sm;
+  }
+  .spell-link { @apply font-medium text-blue-800 underline decoration-dotted cursor-pointer hover:text-blue-600; }
+  .condition-tag { @apply font-semibold text-purple-800 cursor-pointer; }
+  .rule-tag { @apply font-semibold text-emerald-800; }
+
+  .input-field {
+    @apply bg-transparent border-b border-stone-400 focus:border-red-800 outline-none
+           text-stone-800 placeholder-stone-400 w-full text-sm py-0.5 transition-colors;
+  }
+  .number-input {
+    @apply bg-white/60 border border-stone-300 rounded text-center text-stone-800
+           focus:border-red-700 focus:outline-none;
+  }
+}
